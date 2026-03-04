@@ -6,14 +6,8 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Clone submodules
-        script: |
-          git submodule update --init --recursive
-      - name: Make build script executable
-        script: |
-          chmod +x build.sh
-      - name: Run build script
-        script: |
-          ./build.sh
+      - git submodule update --init --recursive
+      - chmod +x build.sh
+      - ./build.sh
     artifacts:
       - packages/*.ipa

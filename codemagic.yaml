@@ -8,16 +8,19 @@ workflows:
       xcode: latest
 
     scripts:
-      - name: Reclone with submodules
+      - name: Clean
         script: |
-          rm -rf *
-          git clone --recursive https://github.com/ssmpsnn/YTLitePlus.git .
-      
-      - name: Make build script executable
-        script: chmod +x build.sh
+          git submodule deinit -f .
+          git clean -fdx
 
-      - name: Run build
-        script: ./build.sh
+      - name: Init submodules
+        script: |
+          git submodule update --init --recursive --depth 1
+
+      - name: Build
+        script: |
+          chmod +x build.sh
+          ./build.sh
 
     artifacts:
       - packages/*.ipa

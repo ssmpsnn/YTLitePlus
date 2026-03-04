@@ -3,11 +3,21 @@ workflows:
     name: YTLitePlus Build
     instance_type: mac_mini_m1
     max_build_duration: 60
+
     environment:
       xcode: latest
+
     scripts:
-      - git submodule update --init --recursive
-      - chmod +x build.sh
-      - ./build.sh
+      - name: Reclone with submodules
+        script: |
+          rm -rf *
+          git clone --recursive https://github.com/ssmpsnn/YTLitePlus.git .
+      
+      - name: Make build script executable
+        script: chmod +x build.sh
+
+      - name: Run build
+        script: ./build.sh
+
     artifacts:
       - packages/*.ipa

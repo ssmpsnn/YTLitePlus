@@ -8,15 +8,6 @@ workflows:
       xcode: latest
 
     scripts:
-      - name: Clean
-        script: |
-          git submodule deinit -f .
-          git clean -fdx
-
-      - name: Init submodules
-        script: |
-          git submodule update --init --recursive --depth 1
-
       - name: Build
         script: |
           chmod +x build.sh
